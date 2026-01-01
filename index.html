@@ -10,85 +10,88 @@
 <body>
 
 <!-- LOGIN -->
-<div id="login" class="container">
-  <div class="header">
-    <h1>🧬 King Bio</h1>
-    <p>ثانوي عام – مستر يحيى محمد</p>
-  </div>
-
-  <div class="card">
-    <input id="code" placeholder="Subscription Code">
-    <input id="pass" type="password" placeholder="Password">
+<div id="login" class="page active">
+  <div class="center-card">
+    <div class="header">
+      <h1>🧬 King Bio</h1>
+      <p>ثانوي عام • مستر يحيى محمد</p>
+    </div>
+    <input id="code" placeholder="كود الاشتراك">
+    <input id="pass" type="password" placeholder="كلمة المرور">
     <button onclick="login()">دخول</button>
+    <button class="mode" onclick="toggleMode()">🌙 / ☀️ الوضع</button>
   </div>
-
-  <button class="mode" onclick="toggleMode()">🌙 / ☀️ الوضع</button>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboard" class="container hidden">
-  <div class="header">
-    <h1>👑 King Bio</h1>
-    <p id="studentName"></p>
-  </div>
+<div id="dashboard" class="page hidden">
+  <div class="center-card">
+    <div class="header">
+      <h1>👑 King Bio</h1>
+      <p id="studentName"></p>
+    </div>
 
-  <div class="nav">
-    <button id="btnLessons">📚 الحصص</button>
-    <button id="btnExams">📝 الامتحانات</button>
-    <button id="btnLeaderboard">🏆 الصدارة</button>
-  </div>
+    <div class="grid-buttons">
+      <button id="btnLessons">📚 الحصص</button>
+      <button id="btnExams">📝 الامتحانات</button>
+      <button id="btnLeaderboard">🏆 الصدارة</button>
+    </div>
 
-  <button onclick="logout()">تسجيل خروج</button>
+    <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
+  </div>
 </div>
 
 <!-- LESSONS -->
-<div id="lessons" class="container hidden">
+<div id="lessons" class="page hidden">
+  <div class="center-card">
+    <h2>📘 الحصص المتاحة</h2>
 
-  <div class="card">
-    <h3>مقدمة في الأحياء</h3>
-    <button class="play-btn" onclick="playVideo('VIDEO_ID_1', this)">▶ تشغيل الفيديو</button>
-    <div class="video-container hidden">
-      <iframe src="" allowfullscreen></iframe>
+    <!-- Lesson 1 -->
+    <div class="lesson-card">
+      <h3>1) مقدمة في الأحياء</h3>
+      <button onclick="playVideo('VIDEO_ID_1', this)">▶ تشغيل الفيديو</button>
+      <div class="video-container hidden"><iframe allowfullscreen></iframe></div>
     </div>
-  </div>
 
-  <div class="card">
-    <h3>الدعامة في النبات</h3>
-    <button class="play-btn" onclick="playVideo('VIDEO_ID_2', this)">▶ تشغيل الفيديو</button>
-    <div class="video-container hidden">
-      <iframe src="" allowfullscreen></iframe>
+    <!-- Lesson 2 -->
+    <div class="lesson-card">
+      <h3>2) الدعامة في النبات</h3>
+      <button onclick="playVideo('VIDEO_ID_2', this)">▶ تشغيل الفيديو</button>
+      <div class="video-container hidden"><iframe allowfullscreen></iframe></div>
     </div>
-  </div>
 
-  <div class="card">
-    <h3>الدعامة في الإنسان</h3>
-    <button class="play-btn" onclick="playVideo('VIDEO_ID_3', this)">▶ تشغيل الفيديو</button>
-    <div class="video-container hidden">
-      <iframe src="" allowfullscreen></iframe>
+    <!-- Lesson 3 -->
+    <div class="lesson-card">
+      <h3>3) الدعامة في الإنسان</h3>
+      <button onclick="playVideo('VIDEO_ID_3', this)">▶ تشغيل الفيديو</button>
+      <div class="video-container hidden"><iframe allowfullscreen></iframe></div>
     </div>
-  </div>
 
-  <button onclick="show('dashboard')">⬅ رجوع</button>
+    <button onclick="showPage('dashboard')">⬅ رجوع</button>
+  </div>
 </div>
 
 <!-- EXAMS -->
-<div id="exams" class="container hidden">
-  <div class="card">
-    <h3>اختبار تدريبي – الوحدة الأولى</h3>
-    <a href="https://forms.gle/FORM_LINK" target="_blank">
-      <button>ابدأ الامتحان</button>
-    </a>
+<div id="exams" class="page hidden">
+  <div class="center-card">
+    <h2>📝 الامتحانات</h2>
+    <div class="exam-card">
+      <h3>اختبار تدريبي – الوحدة الأولى</h3>
+      <a href="https://forms.gle/FORM_LINK" target="_blank">
+        <button>ابدأ الامتحان</button>
+      </a>
+    </div>
+    <button onclick="showPage('dashboard')">⬅ رجوع</button>
   </div>
-  <button onclick="show('dashboard')">⬅ رجوع</button>
 </div>
 
 <!-- LEADERBOARD -->
-<div id="leaderboard" class="container hidden">
-  <div class="card">
-    <h3>🏆 لوحة الصدارة</h3>
+<div id="leaderboard" class="page hidden">
+  <div class="center-card">
+    <h2>🏆 لوحة الصدارة</h2>
     <ol id="leaderboardList"></ol>
+    <button onclick="showPage('dashboard')">⬅ رجوع</button>
   </div>
-  <button onclick="show('dashboard')">⬅ رجوع</button>
 </div>
 
 <script src="app.js"></script>
