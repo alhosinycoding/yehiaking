@@ -1,3 +1,4 @@
+// ===== الطلاب =====
 const students = [
   {code:"KING1", pass:"1111", name:"يحيى حسين"},
   {code:"KING2", pass:"2222", name:"زياد إيهاب"},
@@ -6,43 +7,44 @@ const students = [
 
 let current = null;
 
-/* LOGIN */
-function login(){
-  const c = document.getElementById("code").value;
-  const p = document.getElementById("pass").value;
-
-  const s = students.find(x => x.code===c && x.pass===p);
-  if(s){
+// ===== تسجيل الدخول =====
+function login() {
+  const c = document.getElementById("code").value.trim();
+  const p = document.getElementById("pass").value.trim();
+  const s = students.find(x => x.code === c && x.pass === p);
+  if (s) {
     current = s;
     document.getElementById("studentName").innerText = "أهلاً " + s.name;
-    show("dashboard");
-  } else { alert("كود أو باسورد غير صحيح"); }
+    showPage("dashboard");
+  } else {
+    alert("كود أو كلمة المرور غير صحيحة");
+  }
 }
 
-/* LOGOUT */
-function logout(){
+// ===== تسجيل الخروج =====
+function logout() {
   current = null;
-  show("login");
+  showPage("login");
 }
 
-/* NAVIGATION */
-function show(id){
-  document.querySelectorAll(".container").forEach(d => d.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-  if(id==="leaderboard") showLeaderboard();
+// ===== اظهار صفحة واحدة فقط =====
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  document.getElementById(pageId).classList.remove("hidden");
+  if (pageId === "leaderboard") updateLeaderboard();
 }
 
-/* DARK / LIGHT MODE */
-function toggleMode(){
+// ===== Dark/Light Mode =====
+function toggleMode() {
   document.body.classList.toggle("light");
-  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
 }
 
-/* Load saved theme */
-if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
+// load saved theme
+if (localStorage.getItem("theme") === "light") document.body.classList.add("light");
 
-/* LEADERBOARD */
-function showLeaderboard(){
+// ===== Leaderboard =====
+function updateLeaderboard() {
   const list = document.getElementById("leaderboardList");
   list.innerHTML = "";
   students.forEach(s => {
@@ -52,16 +54,16 @@ function showLeaderboard(){
   });
 }
 
-/* PLAY VIDEO ON DEMAND */
-function playVideo(videoId, btn){
+// ===== تشغيل الفيديو =====
+function playVideo(id, btn) {
   const container = btn.nextElementSibling;
-  const iframe = container.querySelector('iframe');
-  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-  container.classList.remove('hidden');
-  btn.style.display = 'none';
+  const iframe = container.querySelector("iframe");
+  iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+  container.classList.remove("hidden");
+  btn.style.display = "none";
 }
 
-/* BUTTON EVENTS */
-document.getElementById("btnLessons").addEventListener("click",()=>show("lessons"));
-document.getElementById("btnExams").addEventListener("click",()=>show("exams"));
-document.getElementById("btnLeaderboard").addEventListener("click",()=>show("leaderboard"));
+// Buttons
+document.getElementById("btnLessons").onclick = () => showPage("lessons");
+document.getElementById("btnExams").onclick = () => showPage("exams");
+document.getElementById("btnLeaderboard").onclick = () => showPage("leaderboard");
