@@ -38,7 +38,11 @@ function show(id){
 /* DARK / LIGHT MODE */
 function toggleMode(){
   document.body.classList.toggle("light");
+  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
 }
+
+/* Load saved theme */
+if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
 
 /* LEADERBOARD */
 function showLeaderboard(){
@@ -49,6 +53,15 @@ function showLeaderboard(){
     li.innerText = `${s.name}`;
     list.appendChild(li);
   });
+}
+
+/* PLAY VIDEO ON DEMAND */
+function playVideo(videoId, btn){
+  const container = btn.nextElementSibling;
+  const iframe = container.querySelector('iframe');
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  container.classList.remove('hidden');
+  btn.style.display = 'none';
 }
 
 /* BUTTON EVENTS */
